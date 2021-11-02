@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "title": "My First Website",
+      "body": "I love to build website. We’ll begin very easily here, because I’m assuming you are just starting out. No one likes to look back on my first site, but hopefully your experience can be made slightly less traumatic with a push in the right direction. You did Start Here first, right? It’s not a necessity, but it helps.",
+      "author": "Ismail",
+      "id": 1
+    },
+    {
+      "title": "My First Phone",
+      "body": "I was about 16 when I got my first mobile phone. It was a Motorola Flip-phone. That was quite some time ago now. Mobile phones were much more basic then and very different from the smartphones we have nowadays. Actually, I didn’t buy it. It was a gift from my parents when I finished my exams at school. They bought it for me when I graduated. I remember it very well because some of my friends had mobile phones but not all of them.",
+      "author": "Ashraful",
+      "id": 2
+    },
+    {
+      "title": "Love and Life",
+      "body": "We live in a cruel world. Finding true love here is quite impossible. Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection, to the simplest pleasure.",
+      "author": "Zahid",
+      "id": 3
+    }
+  ]
+}
