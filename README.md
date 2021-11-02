@@ -12,4 +12,5 @@ You will also see any lint errors in the console.
 
 ### `npx json-server --watch data/db.json --port 8000`
 
-Runs locla JSON server in [http://localhost:8000](http://localhost:8000).
+Runs local JSON server in [http://localhost:8000](http://localhost:8000).\
+Blog app datas are coming from this local server.
