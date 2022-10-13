@@ -1,67 +1,72 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
+import {useState } from "react";
+import { useHistory} from "react-router";
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
 
 const Create = () => {
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('');
-    const [isPending, setIsPending] = useState(false);
-    const history = useHistory();
+  const [blog, setBlog] = useState({ title: "", body: "", author: "" });
+  const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const blog = { title, body, author };
+  // add new blog to firestore
+  const valueHandler = (e) => {
+    setBlog({ ...blog, [e.target.name]: e.target.value });
+  };
 
-        setIsPending(true);
-
-        fetch('http://localhost:8000/blogs/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(blog)
-        }).then(() => {
-            setIsPending(false);
-            history.push('/');
-        })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsPending(true);
+      await addDoc(collection(db, "blogs"), {
+        title: blog.title,
+        body: blog.body,
+        author: blog.author,
+        created: Timestamp.now(),
+      });
+      setIsPending(false);
+      history.push("/");
+    } catch (err) {
+      alert(err);
     }
+  };
 
+  return (
+    <div className="create">
+      <form onSubmit={handleSubmit}>
+        <h2>Create A New Blog</h2>
+        <label>Title</label>
+        <input
+          type="text"
+          required
+          name="title"
+          value={blog.title}
+          onChange={valueHandler}
+        />
+        <label>Body</label>
+        <textarea
+          required
+          name="body"
+          value={blog.body}
+          onChange={valueHandler}
+        ></textarea>
+        <label>Author</label>
+        <input
+          type="text"
+          required
+          name="author"
+          value={blog.author}
+          onChange={valueHandler}
+        />
 
-    return (
-        <div className="create">
-            <form onSubmit={handleSubmit}>
-                <h2>Create New Blog.</h2>
-                <label>Title</label>
-                <input type='text'
-                    required
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <label>Body</label>
-                <textarea
-                    required
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                ></textarea>
-                <label>Author</label>
-                <input type='text'
-                    required
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                />
-
-                {!isPending && <button>Add New Blog</button>}
-                {isPending && <button disabled>Adding....</button>}
-
-            </form>
-
-            <div>
-                <h1>{title}</h1>
-                <p>{body}</p>
-                <h3>{author}</h3>
-            </div>
-
-        </div>
-
-    );
-}
+        {!isPending && <button>Create Blog</button>}
+        {isPending && <button disabled>creating....</button>}
+      </form>
+    </div>
+  );
+};
 
 export default Create;
