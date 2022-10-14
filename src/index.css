@@ -129,3 +129,33 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.login-from {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: rgb(244, 241, 241);
+  padding: 50px;
+  border: 1px solid #f1356d;
+}
+
+.login input {
+  padding: 10px;
+
+}
+
+.login button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
